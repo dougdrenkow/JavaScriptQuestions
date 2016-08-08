@@ -1,0 +1,116 @@
+1. Name 3 ways to decrease page load (perceived or actual load time).
+
+Minimize images, as with grunt-contrib-imagemin; minimize and combine JavaScript files, as with grunt-contrib-uglify and grunt-contrib-concat; and minimize and combine CSS files, as with grunt-contrib-cssmin -- all of these grunt plugins can be configured with Yeoman. 
+ 
+  
+2. Explain some of the pros and cons for CSS animations versus JavaScript animations.
+ 
+PROS:
+ 
+CSS is easier and arguably more performant for simple, “one shot” animations, such as moving menus in or out, toggling UI element states, or showing tooltips.
+ 
+CSS involves declarative programming, arguably easier to code and less bulky (and thus quicker to load) than imperative JavaScript required to achieve the same effects.
+ 
+CSS animations allow animation and presentation logic to be grouped together.
+ 
+CSS animations, particularly GPU-dependent transforms (of scale, rotation, translation, or skew) and opacity manipulations, are faster than traditional (less than version 3.0) jQuery animations, which are more CPU-dependent (and thus also more draining on mobile batteries).
+  
+Some browsers, particularly in security-sensitive settings, block JavaScript.
+ 
+CONS:
+ 
+JavaScript is better for animations requiring more complexity, such as animating two different properties differently (e.g., different timings or easing); using geometry or physics (e.g., animating along a curve, or presenting bounces or momentum); or requiring interactivity, such as runtime controls (e.g., stop, pause, slow, or reverse).
+ 
+Modern JavaScript frameworks and libraries, such as jQuery 3.0 or GSAP or Velocity.JS, use the Web Animations API, which allows animations to be at least as quick, smooth, and CPU-efficient as CSS animations. The Web Animations API is standards-based, object-oriented, supported by Chrome and Opera, in development for Firefox, and accessible to various modern browsers via a polyfill.
+ 
+CSS animations and transitions typically involve various vendor-specific prefixes.
+ 
+CSS3 animations don’t work in older browsers, such as IE9 and earlier.
+ 
+ 
+3. Using SASS, create a mixin to apply a border radius of a given number, with vendor prefixes.
+ 
+=border-radius($radius)
+	-webkit-border-radius: $radius
+	-moz-border-radius: $radius
+	-ms-border-radius: $radius
+	border-radius: $radius
+ 
+
+4. Javascript: What is the significance of, and reason for, wrapping the entire content of a Javascript source file in a function block?
+ 
+First, because JavaScript variables and functions declared within a function are strictly local to that function, not accessible globally, wrapping JavaScript in a function block controls the availability of any variables and functions defined within the block; they are not directly accessible from outside of the block. The function block is in effect an object, and its internal variables and functions are in effect its private properties and methods.
+ 
+Second, if you define functions within a return statement inside the function block, then those functions can be called from outside the function block: The function block in effect becomes a namespace, the internal block of functions available through the return statement in effect becomes a library, and the functions available through the internal return statements in effect become plugins.
+ 
+Third, you can self-invoke the entire function block, by adding "()" immediately after it, as with a variable passed in from outside the function block; for example, if "jQuery" is passed in, the function block can be used to create a jQuery plugin.
+ 
+Finally, there are some benefits for performance and minification.
+ 
+ 
+5. Javascript: Find the bug and correct the following code so that it returns the expected output:
+ 
+function Person(name){
+    this.name = name;
+}
+ 
+Person.prototype.greet = function(otherName){
+     return "Hi " + otherName + ", my name is " + this.name;
+}
+ 
+ 
+6. Javascript: another developer has written a function
+doFormStuff(input). Define a function that will call
+doFormStuff(input) any time an input with the class "bindMe" is
+focused by the user.
+ 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+ 
+<script>
+	$(document).ready(function(){
+	
+		$(":input.bindMe").focus(function(){doFormStuff()});
+	
+	});
+</script>
+ 
+ 
+7. Javascript: Define a function that returns true if the number 2 is passed, false if not.
+ 
+example: isTwoPassed(1,4) // returns false
+                isTwoPassed(5,3,1,2) //returns true
+ 
+function isTwoPassed() {
+
+	"use strict";
+	
+	var argumentsLength = arguments.length;
+	
+	for (var i=0; i<argumentsLength; i++) {
+	
+		if (arguments[i]  === 2 ) {
+		
+		return true;
+	
+		}
+	
+	}
+	
+	return false;
+
+}
+ 
+ 
+8. Git: You have pushed your bug fix to the branch and encountered a conflict in your CSS— another developer made the same change as you, but added a space at the end of the line. What is your process for fixing this conflict?
+ 
+git fetch [remote-name]
+ 
+git merge [remote-name]/[branch]
+ 
+git push [remote-name] [branch]
+ 
+ 
+9. Unix: How would you move to your project's template directory (~mparish/sites/project/tmpl) and get the lines numbers from every file in every subdirectory containing the string: class="button"
+ 
+grep -rnw 'string: class=\"button\"' ~mparish/sites/project/tmpl
+
